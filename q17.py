@@ -29,28 +29,26 @@ class SierpinskiTriangle:
         window.mainloop()  # Create an event loop
 
     def processKeyEvent(self, event):
-        print("processKeyEvent(self, event)")
-        print("event.char?", event.char)
-        if event.char == '+':
+        if event.char in ('+', '='):
             self.processAddEvent(event)
-        elif event.char == '-':
+        elif event.char in ('-','_'):
             self.processMinusEvent(event)
 
     def processAddEvent(self, event):
         if self.int_order >= 0:
             self.int_order += 1
-            self.order = IntVar(value=self.int_order)
-        self.canvas.update()
+            self.order.set(self.int_order)
+        #self.canvas.update()
         self.display()
 
     def processMinusEvent(self, event):
         if self.order.get() > 0:
             self.int_order -= 1
-            self.order = IntVar(value=self.int_order)
+            self.order.set(self.int_order)
         else:
             self.int_order = 0
-            self.order = IntVar(value=self.int_order)
-        self.canvas.update()
+            self.order.set(self.int_order)
+        #self.canvas.update()
         self.display()
 
     def display(self):  #Trigger Function, run one time.
